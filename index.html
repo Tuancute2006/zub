@@ -1,365 +1,310 @@
-<!DOCTYPE html>
-<html lang="vi">
+<!DOCTYPE html><html lang="vi">
 <head>
   <meta charset="UTF-8" />
-  <title>Pháo hoa hình trái tim - Responsive</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pháo hoa hình trái tim</title>
   <style>
     html, body {
-      margin: 0; padding: 0; height: 100%;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
       background: black;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    #wrapper {
-      width: 100vw;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       overflow: hidden;
-      background: black;
-    }
-    #container {
-      width: 360px;
-      height: 640px;
-      position: relative;
-      background: black;
-      border-radius: 15px;
-      box-shadow: 0 0 25px #ff2f9f;
-      overflow: hidden;
-      transform-origin: top left;
-      user-select: none;
-    }
-    #passwordScreen {
-      position: absolute;
-      inset: 0;
-      background: black;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      z-index: 20;
-      user-select: none;
-    }
-    #passwordScreen h2 {
-      margin: 0 0 10px;
-    }
-    #dots {
-      display: flex;
-      gap: 12px;
-      margin-top: 10px;
-    }
-    .dot {
-      width: 16px;
-      height: 16px;
-      background: #777;
-      border-radius: 50%;
-    }
-    .dot.filled {
-      background: white;
-    }
-    #keypad {
-      display: grid;
-      grid-template-columns: repeat(3, 80px);
-      grid-gap: 15px;
-      margin-top: 20px;
-      user-select: none;
-    }
-    .key {
-      width: 80px;
-      height: 80px;
-      background: #333;
-      color: white;
-      font-size: 24px;
-      border-radius: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      user-select: none;
-      transition: background 0.2s;
-    }
-    .key:active {
-      background: #555;
-    }
-    #errorMsg {
-      color: #ff4d4d;
-      margin-top: 10px;
-      height: 20px;
-      font-weight: 600;
-    }
-    #canvas {
-      position: absolute;
-      top: 0; left: 0;
-      width: 360px;
-      height: 640px;
-      display: none;
-      border-radius: 15px;
-      user-select: none;
-      background: black;
-    }
-    #controls {
-      position: absolute;
-      bottom: 15px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: none;
-      background-color: rgba(0,0,0,0.6);
-      padding: 10px 20px;
-      border-radius: 12px;
-      color: white;
-      font-weight: 600;
-      min-width: 320px;
-      box-sizing: border-box;
-      user-select: none;
-    }
-    .control-row {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 10px;
-    }
-    label {
-      width: 60px;
-      flex-shrink: 0;
-      font-size: 14px;
-      user-select: none;
-    }
-    input[type="range"], input[type="color"] {
-      flex-grow: 1;
-      cursor: pointer;
-      user-select: none;
-      height: 28px;
-      border-radius: 6px;
-      border: none;
-      outline: none;
-    }
+    }#container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  background: black;
+  overflow: hidden;
+}
+
+#passwordScreen {
+  position: absolute;
+  inset: 0;
+  background: black;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+#dots {
+  display: flex;
+  gap: 3vw;
+  margin-top: 2vh;
+}
+
+.dot {
+  width: 4vw;
+  height: 4vw;
+  background: #777;
+  border-radius: 50%;
+}
+
+.dot.filled {
+  background: white;
+}
+
+#keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 20vw);
+  grid-gap: 3vw;
+  margin-top: 3vh;
+}
+
+.key {
+  width: 20vw;
+  height: 20vw;
+  background: #333;
+  color: white;
+  font-size: 6vw;
+  border-radius: 3vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+.key:active {
+  background: #555;
+}
+
+#errorMsg {
+  color: #ff4d4d;
+  margin-top: 1vh;
+  font-size: 4vw;
+}
+
+#canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  z-index: 1;
+}
+
+#controls {
+  position: absolute;
+  bottom: 3vh;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 2vh 4vw;
+  border-radius: 2vw;
+  color: white;
+  font-size: 4vw;
+  display: none;
+  width: 80vw;
+  box-sizing: border-box;
+  z-index: 2;
+}
+
+.control-row {
+  display: flex;
+  align-items: center;
+  gap: 4vw;
+  margin-bottom: 2vh;
+}
+
+label {
+  width: 20vw;
+}
+
+input[type="range"], input[type="color"] {
+  flex: 1;
+  height: 4vh;
+  border: none;
+  border-radius: 1vw;
+}
+
   </style>
 </head>
 <body>
-  <div id="wrapper">
-    <div id="container">
-      <div id="passwordScreen">
-        <h2>Nhập mật mã</h2>
-        <div id="dots">
-          <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
-          <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
-        </div>
-        <div id="keypad">
-          <div class="key">1</div><div class="key">2</div><div class="key">3</div>
-          <div class="key">4</div><div class="key">5</div><div class="key">6</div>
-          <div class="key">7</div><div class="key">8</div><div class="key">9</div>
-          <div class="key">←</div><div class="key">0</div><div class="key">OK</div>
-        </div>
-        <p id="errorMsg"></p>
+  <div id="container">
+    <div id="passwordScreen">
+      <h2>Nhập mật mã</h2>
+      <div id="dots"></div>
+      <div id="keypad"></div>
+      <div id="errorMsg"></div>
+    </div>
+    <canvas id="canvas"></canvas>
+    <div id="controls">
+      <div class="control-row">
+        <label for="speedSlider">Tốc độ</label>
+        <input type="range" id="speedSlider" min="10" max="200" value="100" />
       </div>
-      <canvas id="canvas"></canvas>
-      <div id="controls">
-        <div class="control-row">
-          <label for="speedSlider">Tốc độ</label>
-          <input type="range" id="speedSlider" min="10" max="200" value="100" />
-        </div>
-        <div class="control-row">
-          <label for="colorSlider">Màu</label>
-          <input type="color" id="colorSlider" value="#ff2f9f" />
-        </div>
+      <div class="control-row">
+        <label for="colorSlider">Màu</label>
+        <input type="color" id="colorSlider" value="#ff2f9f" />
       </div>
     </div>
   </div>
+  <script>
+    const correctPassword = "08112006";
+    let entered = "";const dotsContainer = document.getElementById("dots");
+const keypad = document.getElementById("keypad");
+const errorMsg = document.getElementById("errorMsg");
 
-<script>
-  function scaleContainer() {
-    const container = document.getElementById('container');
-    const wrapper = document.getElementById('wrapper');
-    const scaleX = wrapper.clientWidth / 360;
-    const scaleY = wrapper.clientHeight / 640;
-    const scale = Math.min(scaleX, scaleY);
-    container.style.transform = `scale(${scale})`;
-
-    window._containerScale = scale; // Ghi nhớ tỉ lệ để xử lý tọa độ chuột
+function renderDots() {
+  dotsContainer.innerHTML = "";
+  for (let i = 0; i < 8; i++) {
+    const dot = document.createElement("div");
+    dot.className = "dot" + (i < entered.length ? " filled" : "");
+    dotsContainer.appendChild(dot);
   }
+}
 
-  window.addEventListener('resize', scaleContainer);
-  window.addEventListener('load', scaleContainer);
-
-  const correctPassword = "08112006";
-  let entered = "";
-
-  const keys = document.querySelectorAll(".key");
-  const dots = document.querySelectorAll(".dot");
-  const errorMsg = document.getElementById("errorMsg");
-
-  keys.forEach(key => {
-    key.addEventListener("click", () => {
-      const val = key.textContent;
-      if (val === "←") {
-        entered = entered.slice(0, -1);
-        errorMsg.textContent = "";
-      } else if (val === "OK") {
-        if (entered === correctPassword) {
-          document.getElementById("passwordScreen").style.display = "none";
-          document.getElementById("canvas").style.display = "block";
-          document.getElementById("controls").style.display = "block";
-          startEffect();
-        } else {
-          errorMsg.textContent = "Sai mật mã. Thử lại!";
-          entered = "";
-        }
-      } else {
-        if (entered.length < 8) {
-          entered += val;
-          errorMsg.textContent = "";
-        }
-      }
-      updateDots();
-    });
+function renderKeypad() {
+  const keys = ["1","2","3","4","5","6","7","8","9","←","0","OK"];
+  keys.forEach(k => {
+    const key = document.createElement("div");
+    key.className = "key";
+    key.textContent = k;
+    key.onclick = () => handleKey(k);
+    keypad.appendChild(key);
   });
+}
 
-  function updateDots() {
-    dots.forEach((dot, i) => {
-      dot.classList.toggle("filled", i < entered.length);
-    });
+function handleKey(val) {
+  if (val === "←") {
+    entered = entered.slice(0, -1);
+    errorMsg.textContent = "";
+  } else if (val === "OK") {
+    if (entered === correctPassword) {
+      document.getElementById("passwordScreen").style.display = "none";
+      document.getElementById("canvas").style.display = "block";
+      document.getElementById("controls").style.display = "block";
+      startEffect();
+    } else {
+      errorMsg.textContent = "Sai mật mã. Thử lại!";
+      entered = "";
+    }
+  } else {
+    if (entered.length < 8) {
+      entered += val;
+      errorMsg.textContent = "";
+    }
+  }
+  renderDots();
+}
+
+renderDots();
+renderKeypad();
+
+function startEffect() {
+  const canvas = document.getElementById('canvas');
+  const ctx = canvas.getContext('2d');
+  const colorSlider = document.getElementById('colorSlider');
+  const speedSlider = document.getElementById('speedSlider');
+
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  const fontSize = 16;
+  const densityFactor = 2;
+  let columns = Math.floor(canvas.width / fontSize / densityFactor);
+  let drops = Array(columns).fill(1);
+  const fireworks = [];
+
+  class Particle {
+    constructor(x, y, color, char) {
+      this.x = x;
+      this.y = y;
+      this.char = char;
+      this.color = color;
+      this.alpha = 1;
+      this.speed = Math.random() * 2 + 2;
+      this.angle = Math.random() * 2 * Math.PI;
+      this.vx = 0;
+      this.vy = 0;
+      this.gravity = 0.05;
+      this.fontSize = 16;
+    }
+    update() {
+      this.vx *= 0.98;
+      this.vy *= 0.98;
+      this.vy += this.gravity;
+      this.x += this.vx;
+      this.y += this.vy;
+      this.alpha -= 0.01;
+    }
+    draw(ctx) {
+      ctx.save();
+      ctx.globalAlpha = this.alpha;
+      ctx.fillStyle = this.color;
+      ctx.font = `bold ${this.fontSize}px 'Consolas', monospace`;
+      ctx.fillText(this.char, this.x, this.y);
+      ctx.restore();
+    }
   }
 
-  function startEffect() {
-    const canvas = document.getElementById('canvas');
-    const ctx = canvas.getContext('2d');
-    const colorSlider = document.getElementById('colorSlider');
-    const speedSlider = document.getElementById('speedSlider');
-
-    function resizeCanvas() {
-      canvas.width = 360;
-      canvas.height = 640;
+  function createFirework(x, y) {
+    const baseColor = colorSlider.value;
+    const phrase = "♥";
+    const scale = 4;
+    const particles = 100;
+    for (let i = 0; i < particles; i++) {
+      const t = (i / particles) * 2 * Math.PI;
+      const heartX = scale * 16 * Math.pow(Math.sin(t), 3);
+      const heartY = -scale * (13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
+      const p = new Particle(x, y, baseColor, phrase);
+      p.vx = heartX * 0.5;
+      p.vy = heartY * 0.5;
+      fireworks.push(p);
     }
-    resizeCanvas();
-
-    const fontSize = 16;
-    const densityFactor = 2;
-    let columns = Math.floor(canvas.width / fontSize / densityFactor);
-    let drops = Array(columns).fill(1);
-
-    const fireworks = [];
-
-    class Particle {
-      constructor(x, y, color, char) {
-        this.x = x;
-        this.y = y;
-        this.char = char;
-        this.color = color;
-        this.alpha = 1;
-        this.speed = Math.random() * 2 + 2;
-        this.angle = Math.random() * 2 * Math.PI;
-        this.vx = 0;
-        this.vy = 0;
-        this.gravity = 0.05;
-        this.fontSize = 16;
-      }
-      update() {
-        this.vx *= 0.98;
-        this.vy *= 0.98;
-        this.vy += this.gravity;
-        this.x += this.vx;
-        this.y += this.vy;
-        this.alpha -= 0.01;
-      }
-      draw(ctx) {
-        ctx.save();
-        ctx.globalAlpha = this.alpha;
-        ctx.fillStyle = this.color;
-        ctx.font = `bold ${this.fontSize}px 'Consolas', monospace`;
-        ctx.fillText(this.char, this.x, this.y);
-        ctx.restore();
-      }
-    }
-
-    function createFirework(x, y) {
-      const baseColor = colorSlider.value;
-      const phrase = "♥";
-      const scale = 4;
-      const particles = 100;
-
-      for (let i = 0; i < particles; i++) {
-        const t = (i / particles) * 2 * Math.PI;
-        const heartX = scale * 16 * Math.pow(Math.sin(t), 3);
-        const heartY = -scale * (13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
-
-        const p = new Particle(x, y, baseColor, phrase);
-        p.vx = heartX * 0.5;
-        p.vy = heartY * 0.5;
-        fireworks.push(p);
-      }
-    }
-
-    function drawFireworks() {
-      for (let i = fireworks.length - 1; i >= 0; i--) {
-        const p = fireworks[i];
-        p.update();
-        p.draw(ctx);
-        if (p.alpha <= 0) {
-          fireworks.splice(i, 1);
-        }
-      }
-    }
-
-    let isPaused = false;
-
-    function draw() {
-      ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      const baseColor = colorSlider.value;
-      ctx.fillStyle = baseColor;
-      ctx.font = `bold ${fontSize}px 'Consolas', monospace`;
-
-      for (let i = 0; i < drops.length; i++) {
-        ctx.fillText(" Tún iu Hzy ", i * fontSize * densityFactor, drops[i] * fontSize);
-        if (!isPaused) {
-          if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-            drops[i] = 0;
-          }
-          drops[i] += speedSlider.value / 100;
-        }
-      }
-
-      drawFireworks();
-    }
-
-    function loop() {
-      draw();
-      requestAnimationFrame(loop);
-    }
-
-    window.addEventListener('resize', () => {
-      resizeCanvas();
-      columns = Math.floor(canvas.width / fontSize / densityFactor);
-      drops = Array(columns).fill(1);
-    });
-
-    function triggerFireworkAndPause(e) {
-      const x = e.clientX || e.touches?.[0].clientX;
-      const y = e.clientY || e.touches?.[0].clientY;
-
-      const rect = canvas.getBoundingClientRect();
-      const scale = window._containerScale || 1;
-      const localX = (x - rect.left) / scale;
-      const localY = (y - rect.top) / scale;
-
-      createFirework(localX, localY);
-      isPaused = true;
-      setTimeout(() => isPaused = false, 3000);
-    }
-
-    window.addEventListener('click', triggerFireworkAndPause);
-    window.addEventListener('touchstart', triggerFireworkAndPause);
-
-    loop();
   }
-</script>
+
+  let isPaused = false;
+
+  function draw() {
+    ctx.fillStyle = "rgba(0,0,0,0.1)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    const baseColor = colorSlider.value;
+    ctx.fillStyle = baseColor;
+    ctx.font = `bold ${fontSize}px 'Consolas', monospace`;
+
+    for (let i = 0; i < drops.length; i++) {
+      ctx.fillText(" Tún iu Hzy ", i * fontSize * densityFactor, drops[i] * fontSize);
+      if (!isPaused) {
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i] += speedSlider.value / 100;
+      }
+    }
+
+    for (let i = fireworks.length - 1; i >= 0; i--) {
+      const p = fireworks[i];
+      p.update();
+      p.draw(ctx);
+      if (p.alpha <= 0) {
+        fireworks.splice(i, 1);
+      }
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  function triggerFirework(e) {
+    const x = e.clientX || e.touches?.[0].clientX;
+    const y = e.clientY || e.touches?.[0].clientY;
+    createFirework(x, y);
+    isPaused = true;
+    setTimeout(() => isPaused = false, 3000);
+  }
+
+  window.addEventListener('click', triggerFirework);
+  window.addEventListener('touchstart', triggerFirework);
+
+  draw();
+}
+
+  </script>
 </body>
 </html>
